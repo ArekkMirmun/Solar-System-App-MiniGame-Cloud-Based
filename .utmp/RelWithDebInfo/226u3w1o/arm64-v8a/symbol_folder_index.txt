@@ -1,0 +1,1 @@
+C:\Users\alexm\Documents\UnityProyects\SolarSystemApp\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\226u3w1o\obj\arm64-v8a

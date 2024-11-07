@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.23f1
+CRC: 2399259006
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: earthbundle
+      Dependencies: {}
+    Info_1:
+      Name: jupiterbundle
+      Dependencies: {}
+    Info_2:
+      Name: marsbundle
+      Dependencies: {}
+    Info_3:
+      Name: mercurybundle
+      Dependencies: {}
+    Info_4:
+      Name: neptunebundle
+      Dependencies: {}
+    Info_5:
+      Name: saturnbundle
+      Dependencies: {}
+    Info_6:
+      Name: sunbundle
+      Dependencies: {}
+    Info_7:
+      Name: uranusbundle
+      Dependencies: {}
+    Info_8:
+      Name: venusbundle
+      Dependencies: {}
