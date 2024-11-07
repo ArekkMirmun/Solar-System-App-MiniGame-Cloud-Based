@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using Classes;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,7 +10,6 @@ public class SimpleCloudRecoEventHandler : MonoBehaviour
     CloudRecoBehaviour mCloudRecoBehaviour;
     bool mIsScanning = false;
     public string mTargetMetadata = "";
-    public GameObject sphere; // Reference to the sphere object in the scene
     public GameController mGameController;
 
     public ImageTargetBehaviour ImageTargetTemplate;
@@ -100,33 +100,19 @@ public class SimpleCloudRecoEventHandler : MonoBehaviour
     {
         string url = planet.URL;
 
-        sphere.SetActive(false);
-        using (UnityWebRequest webRequest = UnityWebRequestTexture.GetTexture(url))
-        {
-            yield return webRequest.SendWebRequest();
-
-            if (webRequest.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError("Error downloading image: " + webRequest.error);
-                yield break;
-            }
-
-            // Get the downloaded texture
-            Texture2D texture = DownloadHandlerTexture.GetContent(webRequest);
-
-            // Create a new material with the specified shader
-            // Use URP/Lit shader for URP compatibility
-            Material material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-            material.mainTexture = texture;
-            
-            mGameController.PlanetScanned(planet);
-
-            // Assign the new material to the sphere
-            if (sphere != null)
-            {
-                sphere.GetComponent<Renderer>().material = material;
-                sphere.SetActive(true);
-            }
+        UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(url);
+        yield return www.SendWebRequest();
+ 
+        if (www.result != UnityWebRequest.Result.Success) {
+            Debug.Log(www.error);
         }
+        else {
+            AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
+            string[] allAssetNames = bundle.GetAllAssetNames();
+            string gameObjectName = Path.GetFileNameWithoutExtension(allAssetNames[0]).ToString();
+            GameObject objectFound = bundle.LoadAsset(gameObjectName) as GameObject;
+            Instantiate(objectFound,transform.position, transform.rotation);
+        }
+        
     }
 }
