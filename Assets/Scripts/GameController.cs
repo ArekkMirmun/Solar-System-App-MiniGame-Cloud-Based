@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI pointText;
     public TextMeshProUGUI correctPlanetScannedText;
     public TextMeshProUGUI incorrectPlanetScannedText;
+    public TextMeshProUGUI loadingPlanetText;
     public Button loadGameOverButton;
     
     private PointController _pointController;
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
     public AudioSource incorrectPlanetSound;
 
     public bool scannable;
+    public bool loadingPlanet;
 
     public List<string> planets;
 
@@ -37,7 +39,9 @@ public class GameController : MonoBehaviour
         ResetCountDown();
         InitializePlanetList();
         NextPlanet();
+        SetLoadingPlanet(false);
         scannable = true;
+        loadingPlanet = false;
         _pointController.Points = 0;
         _pointController.GameOver = false;
         correctPlanetScannedText.gameObject.SetActive(false);
@@ -53,7 +57,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (scannable)
+        if (scannable && !loadingPlanet)
         {
             if (_countDownTime > 0)
             {
@@ -97,6 +101,7 @@ public class GameController : MonoBehaviour
 
     public void PlanetScanned(Planet planet)
     {
+        SetLoadingPlanet(false);
         string planetName = planet.Name;
         
         print("Plannet scanned: " + planetName);
@@ -105,7 +110,12 @@ public class GameController : MonoBehaviour
             StartCoroutine(CheckPlanetScanned(planetName));
         }
     }
-    
+
+    public void SetLoadingPlanet(bool loadingPlanet)
+    {
+        loadingPlanetText.gameObject.SetActive(loadingPlanet);
+        this.loadingPlanet = loadingPlanet;
+    }
 
     private IEnumerator CheckPlanetScanned(string planetName)
     {

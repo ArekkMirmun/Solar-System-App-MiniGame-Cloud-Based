@@ -99,6 +99,7 @@ public class SimpleCloudRecoEventHandler : MonoBehaviour
     private IEnumerator SetPlanetScanned(Planet planet)
     {
         string url = planet.URL;
+        mGameController.SetLoadingPlanet(true);
 
         UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(url);
         yield return www.SendWebRequest();
@@ -111,7 +112,18 @@ public class SimpleCloudRecoEventHandler : MonoBehaviour
             string[] allAssetNames = bundle.GetAllAssetNames();
             string gameObjectName = Path.GetFileNameWithoutExtension(allAssetNames[0]).ToString();
             GameObject objectFound = bundle.LoadAsset(gameObjectName) as GameObject;
-            Instantiate(objectFound,transform.position, transform.rotation);
+            GameObject planetObject = Instantiate(
+                    objectFound,
+                    new Vector3(ImageTargetTemplate.transform.position.x,
+                        ImageTargetTemplate.transform.position.y + 0.05f,
+                        ImageTargetTemplate.transform.position.z),
+                    ImageTargetTemplate.transform.rotation
+                );
+            
+                planetObject.transform.SetParent(ImageTargetTemplate.transform);
+            Destroy(planetObject, 1.7f);
+            mGameController.PlanetScanned(planet);
+            
         }
         
     }
