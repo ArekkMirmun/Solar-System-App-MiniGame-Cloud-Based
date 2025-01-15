@@ -1,17 +1,18 @@
 # Proyecto: Juego del Sistema Solar con AR
 
 ## Descripción
-Este proyecto es un juego de realidad aumentada (AR) que utiliza **Vuforia** y su sistema de *Cloud Targeting*. El objetivo del juego es identificar y escanear el planeta correcto dentro del sistema solar.
+Este proyecto es un juego de realidad aumentada (AR) que utiliza **Vuforia** y su sistema de *Cloud Targeting*, el cual nos permite añadir planetas sin tener que modificar el proyecto. El objetivo del juego es identificar y escanear el planeta correcto dentro del sistema solar.
 
 Al iniciar el juego, se selecciona un planeta de manera aleatoria, y el jugador debe utilizar su dispositivo para escanear el modelo AR del planeta correspondiente. Este juego es ideal para aprender y explorar más sobre los planetas de nuestro sistema solar de una manera interactiva y entretenida.
 
+Este proyecto es una de las dos variantes que he programado. En esta variante, se descarga el modelo completo del planeta escaneado en 3d, y se muestra en escena.
 ---
 ## Cómo Jugar
 1. Abre la aplicación en tu dispositivo móvil.
 2. Un planeta será seleccionado de forma aleatoria.
 3. Usa la cámara de tu dispositivo para buscar y escanear el planeta correcto.
    <a href="https://drive.google.com/drive/folders/1xhyuLGclJY2558psiMm5xvv1yv9SkUjZ?usp=sharing" target="_blank">Acceder a Imagenes</a>
-5. ¡Escanea correctamente para ganar puntos!
+5. ¡Escanea correctamente para ganar puntos, y ve los planetas en tu propia pantalla!
 
 ---
 ## Características
@@ -34,7 +35,7 @@ Al iniciar el juego, se selecciona un planeta de manera aleatoria, y el jugador 
 - Cámara funcional para escaneo AR.
 ---
 ## Estructura del Proyecto
-- **Assets/**: Contiene todos los modelos 3D, texturas y scripts.
+- **Assets/**: Contiene todos los prefabs, scripts y componentes del juego.
 - **Assets/Scenes/**: Archivos de escenas de Unity.
 - **Assets/Scripts/**: Código fuente del juego.
 
